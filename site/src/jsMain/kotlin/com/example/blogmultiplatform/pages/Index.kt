@@ -15,4 +15,5 @@ fun HomePage() {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text("Hello from the website!")
     }
+    println("Testing console message")
 }
