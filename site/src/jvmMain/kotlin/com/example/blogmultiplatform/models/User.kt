@@ -5,11 +5,11 @@ import kotlinx.serialization.Serializable
 import org.litote.kmongo.id.ObjectIdGenerator
 
 @Serializable
-data class User(
+actual data class User(
     @SerialName(value = "_id")
-    val id: String = ObjectIdGenerator.newObjectId<String>().id.toHexString(),
-    val username: String = "",
-    val password: String = ""
+    actual val id: String = ObjectIdGenerator.newObjectId<String>().id.toHexString(),
+    actual val username: String = "",
+    actual val password: String = ""
 )
 
 @Serializable
