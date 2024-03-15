@@ -10,3 +10,10 @@ actual data class User(
     actual val username: String = "",
     actual val password: String = ""
 )
+
+@Serializable
+actual data class UserWithoutPassword(
+    @SerialName(value = "_id")
+    actual val id: String = "",
+    actual val username: String = ""
+)

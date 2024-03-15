@@ -5,3 +5,8 @@ expect class User {
     val username: String
     val password: String
 }
+
+expect class UserWithoutPassword {
+    val id: String
+    val username: String
+}
