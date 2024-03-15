@@ -2,14 +2,12 @@ package com.example.blogmultiplatform.data
 
 import com.example.blogmultiplatform.models.User
 import com.example.blogmultiplatform.util.Constants.DATABASE_NAME
-import com.mongodb.client.FindIterable
+import com.mongodb.client.model.Filters
+import com.mongodb.kotlin.client.coroutine.MongoClient
 import com.varabyte.kobweb.api.data.add
 import com.varabyte.kobweb.api.init.InitApi
 import com.varabyte.kobweb.api.init.InitApiContext
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.and
-import org.litote.kmongo.eq
-import org.litote.kmongo.getCollection
+import kotlinx.coroutines.flow.firstOrNull
 
 @InitApi
 fun initMongoDB(context: InitApiContext) {
@@ -21,22 +19,21 @@ fun initMongoDB(context: InitApiContext) {
 }
 
 class MongoDB(private val context: InitApiContext) : MongoRepository {
-    private val client = KMongo.createClient()
+    private val client = MongoClient.create()
     private val database = client.getDatabase(DATABASE_NAME)
-    private val userCollection = database.getCollection<User>()
+    private val userCollection = database.getCollection<User>("user")
 
     override suspend fun userExists(user: User): User? {
         return try {
             userCollection.find(
-                and(
-                    User::username eq user.username,
-                    User::password eq user.password
+                Filters.and(
+                    Filters.eq(User::username.name, user.username),
+                    Filters.eq(User::password.name, user.password)
                 )
-            ).first()//.awaitFirst()
+            ).firstOrNull()
         } catch (e: Exception) {
             context.logger.error(e.message.toString())
             null
         }
     }
-
 }

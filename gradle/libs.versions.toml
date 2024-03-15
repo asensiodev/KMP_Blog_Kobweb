@@ -3,6 +3,7 @@ jetbrains-compose = "1.5.12"
 kobweb = "0.16.2"
 kotlin = "1.9.22"
 kmongo = "4.9.0"
+mongodb-kotlin = "4.10.1"
 serialization = "1.5.1"
 
 [libraries]
@@ -11,10 +12,9 @@ kobweb-core = { module = "com.varabyte.kobweb:kobweb-core ", version.ref = "kobw
 kobweb-silk = { module = "com.varabyte.kobweb:kobweb-silk", version.ref = "kobweb" }
 kobweb-worker = { module = "com.varabyte.kobweb:kobweb-worker", version.ref = "kobweb" }
 kobwebx-markdown = { module = "com.varabyte.kobwebx:kobwebx-markdown", version.ref = "kobweb" }
-kmongo-database = { module = "org.litote.kmongo:kmongo", version.ref = "kmongo" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+mongodb-kotlin-driver = { module = "org.mongodb:mongodb-driver-kotlin-coroutine", version.ref = "mongodb-kotlin" }
 silk-foundation = { module = "com.varabyte.kobweb:silk-foundation", version.ref = "kobweb" }
-
 silk-icons-fa = { module = "com.varabyte.kobwebx:silk-icons-fa", version.ref = "kobweb" }
 silk-icons-mdi = { module = "com.varabyte.kobwebx:silk-icons-mdi", version.ref = "kobweb" }
 
