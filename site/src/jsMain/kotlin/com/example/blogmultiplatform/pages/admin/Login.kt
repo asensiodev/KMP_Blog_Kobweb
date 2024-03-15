@@ -39,7 +39,7 @@ fun LoginScreen() {
 
     val scope = rememberCoroutineScope()
     val context = rememberPageContext()
-    var errorText by remember { mutableStateOf("") }
+    var errorText by remember { mutableStateOf(" ") }
 
     Box(
         modifier = Modifier.fillMaxSize().backgroundColor(Theme.Outline.rgb),
