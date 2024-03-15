@@ -25,7 +25,7 @@ suspend fun userExists(context: ApiContext) {
         if (user != null) {
             context.res.setBodyText(
                 Json.encodeToString<UserWithoutPassword>(
-                    UserWithoutPassword(id = user.id, username = user.username)
+                    UserWithoutPassword(_id = user._id, username = user.username)
                 )
             )
         } else {

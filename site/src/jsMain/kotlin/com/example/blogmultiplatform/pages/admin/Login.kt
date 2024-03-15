@@ -140,7 +140,7 @@ fun LoginScreen() {
 private fun rememberLoggedIn(remember: Boolean, user: UserWithoutPassword? = null) {
     localStorage["remember"] = remember.toString()
     if (user != null) {
-        localStorage["userId"] = user.id
+        localStorage["userId"] = user._id
         localStorage["username"] = user.username
     }
 }
