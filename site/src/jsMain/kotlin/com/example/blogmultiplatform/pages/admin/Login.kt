@@ -88,6 +88,13 @@ fun LoginScreen() {
                         attr(attr = "placeholder", value = "Password")
                     }
             )
+            SpanText(
+                text = errorText,
+                modifier = Modifier
+                    .color(Colors.Red)
+                    .textAlign(TextAlign.Center)
+                    .margin(bottom = 10.px)
+            )
             Button(
                 attrs = Modifier
                     .width(100.px)
@@ -111,12 +118,12 @@ fun LoginScreen() {
                                 } else {
                                     errorText = "User not registered"
                                     delay(3_000)
-                                    errorText = ""
+                                    errorText = " "
                                 }
                             } else {
                                 errorText = "Input fields are empty"
                                 delay(3_000)
-                                errorText = ""
+                                errorText = " "
                             }
                         }
                     }
@@ -127,12 +134,6 @@ fun LoginScreen() {
                     modifier = Modifier
                 )
             }
-            SpanText(
-                text = errorText,
-                modifier = Modifier
-                    .color(Colors.Red)
-                    .textAlign(TextAlign.Center)
-            )
         }
     }
 }
