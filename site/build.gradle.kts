@@ -1,6 +1,5 @@
 import com.varabyte.kobweb.gradle.application.extensions.AppBlock.LegacyRouteRedirectStrategy
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
-import org.gradle.kotlin.dsl.support.kotlinCompilerOptions
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -49,7 +48,6 @@ kotlin {
         }
     }
 
-    // Assuming this is a multiplatform project, add kotlinOptions like this:
     js().compilations.all {
         kotlinOptions {
             freeCompilerArgs += "-Xexpect-actual-classes"
