@@ -5,8 +5,9 @@ import com.example.blogmultiplatform.models.User
 import com.example.blogmultiplatform.models.UserWithoutPassword
 import com.example.blogmultiplatform.util.Id
 import com.example.blogmultiplatform.util.Res
-import com.example.blogmultiplatform.util.userExists
+import com.example.blogmultiplatform.util.checkUserExistence
 import com.models.Theme
+import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.FontSize
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
@@ -104,17 +105,18 @@ fun LoginScreen() {
                     .fontSize(FontSize.Medium)
                     .border(width = 2.px, style = LineStyle.None, color = Colors.White)
                     .padding(10.px)
+                    .cursor(Cursor.Pointer)
                     .onClick {
                         scope.launch {
                             val username = (document.getElementById(Id.USERNAME_INPUT) as HTMLInputElement).value
                             val password = (document.getElementById(Id.PASSWORD_INPUT) as HTMLInputElement).value
                             if (username.isNotEmpty() && password.isNotEmpty()) {
-                                val user = userExists(
-                                    User(username, password)
+                                val user = checkUserExistence(
+                                    User(username = username, password = password)
                                 )
                                 if (user != null) {
                                     rememberLoggedIn(remember = true, user = user)
-                                    context.router.navigateTo("admin/home")
+                                    context.router.navigateTo("/admin")
                                 } else {
                                     errorText = "User not registered"
                                     delay(3_000)
@@ -138,7 +140,10 @@ fun LoginScreen() {
     }
 }
 
-private fun rememberLoggedIn(remember: Boolean, user: UserWithoutPassword? = null) {
+private fun rememberLoggedIn(
+    remember: Boolean,
+    user: UserWithoutPassword? = null
+) {
     localStorage["remember"] = remember.toString()
     if (user != null) {
         localStorage["userId"] = user._id
