@@ -11,10 +11,6 @@ import kotlinx.coroutines.flow.firstOrNull
 
 @InitApi
 fun initMongoDB(context: InitApiContext) {
-    System.setProperty(
-        "org.litote.mongo.test.mapping.service",
-        "org.litote.kmongo.serialization.SerializationClassMappingTypeService",
-    )
     context.data.add(MongoDB(context = context))
 }
 
@@ -23,7 +19,7 @@ class MongoDB(private val context: InitApiContext) : MongoRepository {
     private val database = client.getDatabase(DATABASE_NAME)
     private val userCollection = database.getCollection<User>("user")
 
-    override suspend fun userExists(user: User): User? {
+    override suspend fun checkUserExistence(user: User): User? {
         return try {
             userCollection.find(
                 Filters.and(
@@ -36,4 +32,16 @@ class MongoDB(private val context: InitApiContext) : MongoRepository {
             null
         }
     }
+
+    override suspend fun checkUserId(id: String): Boolean {
+        return true
+//        return try {
+//            val documentCount = userCollection.countDocuments(Filters.eq(User::id.name, id))
+//            documentCount > 0
+//        } catch (e: Exception) {
+//            context.logger.error(e.message.toString())
+//            false
+//        }
+    }
+
 }
