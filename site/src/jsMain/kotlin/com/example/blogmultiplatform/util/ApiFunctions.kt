@@ -4,18 +4,36 @@ import com.example.blogmultiplatform.models.User
 import com.example.blogmultiplatform.models.UserWithoutPassword
 import com.varabyte.kobweb.browser.api
 import kotlinx.browser.window
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-suspend fun userExists(user: User): UserWithoutPassword? {
+suspend fun checkUserExistence(user: User): UserWithoutPassword? {
     return try {
         val result = window.api.tryPost(
-            apiPath = "userexists",
+            apiPath = "usercheck",
             body = Json.encodeToString(user).encodeToByteArray()
         )
-        Json.decodeFromString<UserWithoutPassword>(result.toString())
+        result?.decodeToString()?.let {
+            Json.decodeFromString<UserWithoutPassword>(it)
+        }
     } catch (e: Exception) {
-        println("Error checking user existance ${e.message}")
+        println("Error checking user existence ${e.message}")
         null
+    }
+}
+
+suspend fun checkUserId(id: String): Boolean {
+    return try {
+        val result = window.api.tryPost(
+            apiPath = "checkuserid",
+            body = Json.encodeToString(id).encodeToByteArray()
+        )
+        result?.decodeToString()?.let {
+            Json.decodeFromString<Boolean>(it)
+        } ?: false
+    } catch (e: Exception) {
+        println(e.message.toString())
+        false
     }
 }
