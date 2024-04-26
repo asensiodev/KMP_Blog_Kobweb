@@ -91,7 +91,8 @@ fun NavigationItem(
 fun SidePanelIcon(iconPath: String) {
     Image(
         modifier = Modifier
-            .width(30.px)
+            .size(24.px)
+            //.width(30.px)
             .margin(right = 5.px, bottom = 10.px)
             .borderRadius(5.px),
         src = iconPath
