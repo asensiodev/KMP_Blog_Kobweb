@@ -6,7 +6,7 @@ import com.example.blogmultiplatform.models.UserWithoutPassword
 import com.example.blogmultiplatform.util.Id
 import com.example.blogmultiplatform.util.Res
 import com.example.blogmultiplatform.util.checkUserExistence
-import com.models.Theme
+import com.example.blogmultiplatform.models.Theme
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.FontSize
 import com.varabyte.kobweb.compose.css.TextAlign
